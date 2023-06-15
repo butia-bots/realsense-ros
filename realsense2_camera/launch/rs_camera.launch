@@ -70,8 +70,9 @@
   <arg name="stereo_module/gain/1"      default="16"/>
   <arg name="stereo_module/exposure/2"  default="1"/>
   <arg name="stereo_module/gain/2"      default="16"/>
-  
-  
+
+  <arg name="machine"           default="localhost"/>
+  <arg name="use_machine"       default="true"/>
 
   <group ns="$(arg camera)">
     <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
@@ -144,6 +145,9 @@
 
       <arg name="allow_no_texture_points"  value="$(arg allow_no_texture_points)"/>
       <arg name="ordered_pc"               value="$(arg ordered_pc)"/>
+
+      <arg name="machine"           value="$(arg machine)"/>
+      <arg name="use_machine"       value="$(arg use_machine)"/>
       
     </include>
   </group>

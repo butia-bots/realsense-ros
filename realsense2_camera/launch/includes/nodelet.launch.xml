@@ -108,10 +108,13 @@
   <arg name="wait_for_device_timeout"  default= "-1.0"/>
   <arg name="unite_imu_method"         default="none"/> <!-- Options are: [none, copy, linear_interpolation] -->
   
+  <arg name="machine"           default="localhost"/>
+  <arg name="use_machine"       default="true"/>
 
+  <machine name="localhost" address="localhost" if="$(arg use_machine)"/>
 
-  <node unless="$(arg external_manager)" pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" output="$(arg output)" required="$(arg required)" respawn="$(arg respawn)"/>
-  <node pkg="nodelet" type="nodelet" name="realsense2_camera" args="load realsense2_camera/RealSenseNodeFactory $(arg manager)" required="$(arg required)" respawn="$(arg respawn)">
+  <node unless="$(arg external_manager)" pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" machine="$(arg machine)" output="$(arg output)" required="$(arg required)" respawn="$(arg respawn)"/>
+  <node pkg="nodelet" type="nodelet" name="realsense2_camera" args="load realsense2_camera/RealSenseNodeFactory $(arg manager)" machine="$(arg machine)" required="$(arg required)" respawn="$(arg respawn)">
     <param name="serial_no"                type="str"  value="$(arg serial_no)"/>
     <param name="usb_port_id"              type="str"  value="$(arg usb_port_id)"/>
     <param name="device_type"              type="str"  value="$(arg device_type)"/>
